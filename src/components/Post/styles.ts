@@ -13,9 +13,12 @@ export const PostContainer = styled.div`
     justify-content: space-between;
     margin-bottom: 1rem;
 
-    strong {
+    a {
       width: 70%;
       color: ${(props) => props.theme['base-subtitle']};
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.25rem;
     }
   }
   p {

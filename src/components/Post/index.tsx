@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom'
 import { PostContainer } from './styles'
 
 export function Post() {
   return (
     <PostContainer>
       <div>
-        <strong>JavaScript data types and data structures</strong>
+        <Link to="/po">JavaScript data types and data structures</Link>
         <span>Há 1 dia</span>
       </div>
 

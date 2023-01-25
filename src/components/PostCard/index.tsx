@@ -1,22 +1,22 @@
 import { Link } from 'react-router-dom'
-import { PostContainer } from './styles'
+import { PostCardContainer } from './styles'
 
-interface PostProps {
+interface PostCardProps {
   id: number
   title: string
   body: string
   createdAt: string
 }
 
-export function Post({ id, title, body, createdAt }: PostProps) {
+export function PostCard({ id, title, body, createdAt }: PostCardProps) {
   return (
-    <PostContainer>
+    <PostCardContainer>
       <div>
         <Link to={`/${id}`}>{title}</Link>
         <span>{createdAt}</span>
       </div>
 
       <p>{body}</p>
-    </PostContainer>
+    </PostCardContainer>
   )
 }

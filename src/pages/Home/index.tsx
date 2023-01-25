@@ -1,5 +1,5 @@
 import { Header } from '../../components/Header'
-import { Post } from '../../components/Post'
+import { PostCard } from '../../components/PostCard'
 import { Profile } from '../../components/Profile'
 import { SearchForm } from './components/SearchForm'
 import { PostsContainer, PostsList } from './styles'
@@ -23,43 +23,43 @@ export function Home() {
       <PostsContainer>
         <SearchForm />
         <PostsList>
-          <Post
+          <PostCard
             id={Math.ceil(Math.random() * 999)}
             body={postData.body}
             createdAt={postData.created_at}
             title={postData.title}
           />
-          <Post
+          <PostCard
             id={Math.ceil(Math.random() * 999)}
             body={postData.body}
             createdAt={postData.created_at}
             title={postData.title}
           />
-          <Post
+          <PostCard
             id={Math.ceil(Math.random() * 999)}
             body={postData.body}
             createdAt={postData.created_at}
             title={postData.title}
           />
-          <Post
+          <PostCard
             id={Math.ceil(Math.random() * 999)}
             body={postData.body}
             createdAt={postData.created_at}
             title={postData.title}
           />
-          <Post
+          <PostCard
             id={Math.ceil(Math.random() * 999)}
             body={postData.body}
             createdAt={postData.created_at}
             title={postData.title}
           />
-          <Post
+          <PostCard
             id={Math.ceil(Math.random() * 999)}
             body={postData.body}
             createdAt={postData.created_at}
             title={postData.title}
           />
-          <Post
+          <PostCard
             id={Math.ceil(Math.random() * 999)}
             body={postData.body}
             createdAt={postData.created_at}

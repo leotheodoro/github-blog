@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const PostContainer = styled.div`
+export const PostCardContainer = styled.div`
   max-width: 416px;
   width: 100%;
   border-radius: 10px;

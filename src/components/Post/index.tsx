@@ -1,21 +1,22 @@
 import { Link } from 'react-router-dom'
 import { PostContainer } from './styles'
 
-export function Post() {
+interface PostProps {
+  id: number
+  title: string
+  body: string
+  createdAt: string
+}
+
+export function Post({ id, title, body, createdAt }: PostProps) {
   return (
     <PostContainer>
       <div>
-        <Link to="/po">JavaScript data types and data structures</Link>
-        <span>Há 1 dia</span>
+        <Link to={`/${id}`}>{title}</Link>
+        <span>{createdAt}</span>
       </div>
 
-      <p>
-        Programming languages all have built-in data structures, but these often
-        differ from one language to another. This article attempts to list the
-        built-in data structures available in JavaScript and what properties
-        they have. These can be used to build other data structures. Wherever
-        possible, comparisons with other languages are drawn.
-      </p>
+      <p>{body}</p>
     </PostContainer>
   )
 }

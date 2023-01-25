@@ -32,13 +32,28 @@ export const ProfileInformation = styled.div`
     margin-bottom: 8px;
 
     a {
+      display: flex;
+      align-items: center;
       font-size: 0.75rem;
       color: ${(props) => props.theme.blue};
       text-decoration: none;
+      gap: 0.5rem;
     }
   }
 
   p {
     margin-bottom: 24px;
+  }
+`
+
+export const ProfileSocialMedias = styled.div`
+  display: flex;
+  gap: 2rem;
+
+  span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
   }
 `

@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContextSelector } from 'use-context-selector'
 import { Header } from '../../components/Header'
 import { PostCard } from '../../components/PostCard'
 import { Profile } from '../../components/Profile'
@@ -7,7 +7,7 @@ import { SearchForm } from './components/SearchForm'
 import { PostsContainer, PostsList } from './styles'
 
 export function Home() {
-  const { issues } = useContext(UserContext)
+  const issues = useContextSelector(UserContext, (context) => context.issues)
 
   return (
     <>

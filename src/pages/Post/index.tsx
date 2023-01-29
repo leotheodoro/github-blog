@@ -7,8 +7,9 @@ import {
   Chats,
   GithubLogo,
 } from 'phosphor-react'
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { useContextSelector } from 'use-context-selector'
 import { Header } from '../../components/Header'
 import { UserContext } from '../../contexts/UserContext'
 import { PostInfo, PostContent, PostContainer, PostBody } from './styles'
@@ -16,7 +17,15 @@ import { PostInfo, PostContent, PostContainer, PostBody } from './styles'
 export function Post() {
   const { number } = useParams()
 
-  const { getIssueById, issueOpened } = useContext(UserContext)
+  const { getIssueById, issueOpened } = useContextSelector(
+    UserContext,
+    (context) => {
+      return {
+        getIssueById: context.getIssueById,
+        issueOpened: context.issueOpened,
+      }
+    },
+  )
 
   useEffect(() => {
     getIssueById(Number(number))

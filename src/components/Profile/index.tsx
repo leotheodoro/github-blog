@@ -1,5 +1,5 @@
 import { ArrowSquareOut, Buildings, GithubLogo, Users } from 'phosphor-react'
-import { useContext } from 'react'
+import { useContextSelector } from 'use-context-selector'
 import { UserContext } from '../../contexts/UserContext'
 import {
   ProfileContainer,
@@ -9,7 +9,9 @@ import {
 } from './styles'
 
 export function Profile() {
-  const { user } = useContext(UserContext)
+  const user = useContextSelector(UserContext, (context) => {
+    return context.user
+  })
 
   return (
     <ProfileContainer>

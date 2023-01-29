@@ -22,6 +22,7 @@ export function Post() {
     getIssueById(Number(number))
   }, [getIssueById, number])
 
+  console.log(issueOpened)
   return (
     <>
       <Header />
@@ -37,9 +38,11 @@ export function Post() {
           </header>
           <strong>{issueOpened.title}</strong>
           <PostInfo>
-            <span>
-              <GithubLogo size={16} weight="fill" /> {issueOpened.user.login}
-            </span>
+            {issueOpened.user && (
+              <span>
+                <GithubLogo size={16} weight="fill" /> {issueOpened.user.login}
+              </span>
+            )}
             <span>
               <CalendarBlank size={16} weight="fill" />{' '}
               {issueOpened.created_at &&

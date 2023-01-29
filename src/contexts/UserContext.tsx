@@ -34,6 +34,7 @@ interface UserContextTypes {
   user: User
   issues: Issue[]
   issueOpened: Issue
+  totalIssues: number
   getIssueById: (number: number) => Promise<void>
   fetchIssues: (query?: string) => Promise<void>
 }
@@ -50,6 +51,7 @@ export function UserProvider({ children }: UserProviderProps) {
   const [user, setUser] = useState<User>({} as User)
   const [issues, setIssues] = useState<Issue[]>([])
   const [issueOpened, setIssueOpened] = useState<Issue>({} as Issue)
+  const [totalIssues, setTotalIssues] = useState(0)
 
   const fetchUsers = useCallback(async () => {
     const response = await api.get('users/leotheodoro')
@@ -64,6 +66,7 @@ export function UserProvider({ children }: UserProviderProps) {
       }repo:leotheodoro/github-blog`,
     )
 
+    setTotalIssues(response.data.total_count)
     setIssues(response.data.items)
   }, [])
 
@@ -82,7 +85,14 @@ export function UserProvider({ children }: UserProviderProps) {
 
   return (
     <UserContext.Provider
-      value={{ user, issues, issueOpened, getIssueById, fetchIssues }}
+      value={{
+        user,
+        issues,
+        issueOpened,
+        getIssueById,
+        fetchIssues,
+        totalIssues,
+      }}
     >
       {children}
     </UserContext.Provider>

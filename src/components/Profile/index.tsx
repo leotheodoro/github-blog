@@ -1,4 +1,6 @@
 import { ArrowSquareOut, Buildings, GithubLogo, Users } from 'phosphor-react'
+import { useContext } from 'react'
+import { UserContext } from '../../contexts/UserContext'
 import {
   ProfileContainer,
   ProfileContent,
@@ -7,34 +9,35 @@ import {
 } from './styles'
 
 export function Profile() {
+  const { user } = useContext(UserContext)
+
   return (
     <ProfileContainer>
       <ProfileContent>
-        <img
-          src="https://avatars.githubusercontent.com/u/31370547?v=4"
-          alt=""
-        />
+        <img src={user.avatar_url} alt="" />
         <ProfileInformation>
           <strong>
-            Leonardo Theodoro
-            <a href="#">
+            {user.name}
+            <a href={user.html_url} target="_blank" rel="noreferrer">
               GITHUB <ArrowSquareOut size={16} />
             </a>
           </strong>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores
-            illo laboriosam reprehenderit, exercitationem totam consequuntu
-          </p>
+          <p>{user.bio}</p>
           <ProfileSocialMedias>
             <span>
-              <GithubLogo weight="fill" /> leotheodoro
+              <GithubLogo weight="fill" /> {user.login}
             </span>
-            <span>
-              <Buildings weight="fill" /> Recruit Robin
-            </span>
-            <span>
-              <Users weight="fill" /> 32 Seguidores
-            </span>
+            {user.company && (
+              <span>
+                <Buildings weight="fill" /> {user.company}
+              </span>
+            )}
+            {user.followers > 0 && (
+              <span>
+                <Users weight="fill" /> {user.followers}{' '}
+                {user.followers === 1 ? 'Seguidor' : 'Seguidores'}
+              </span>
+            )}
           </ProfileSocialMedias>
         </ProfileInformation>
       </ProfileContent>

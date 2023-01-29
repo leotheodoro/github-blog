@@ -1,3 +1,5 @@
+import { formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/esm/locale/pt-BR/index.js'
 import {
   ArrowLeft,
   ArrowSquareOut,
@@ -5,12 +7,20 @@ import {
   Chats,
   GithubLogo,
 } from 'phosphor-react'
+import { useContext, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Header } from '../../components/Header'
+import { UserContext } from '../../contexts/UserContext'
 import { PostInfo, PostContent, PostContainer, PostBody } from './styles'
 
 export function Post() {
-  const { id } = useParams()
+  const { number } = useParams()
+
+  const { getIssueById, issueOpened } = useContext(UserContext)
+
+  useEffect(() => {
+    getIssueById(Number(number))
+  }, [getIssueById, number])
 
   return (
     <>
@@ -21,36 +31,32 @@ export function Post() {
             <Link to="/">
               <ArrowLeft /> VOLTAR
             </Link>
-            <a href="">
+            <a href={issueOpened.html_url} target="_blank" rel="noreferrer">
               VER NO GITHUB <ArrowSquareOut />
             </a>
           </header>
-          <strong>Javascript data types and data structures</strong>
+          <strong>{issueOpened.title}</strong>
           <PostInfo>
             <span>
-              <GithubLogo size={16} weight="fill" /> leotheodoro
+              <GithubLogo size={16} weight="fill" /> {issueOpened.user.login}
             </span>
             <span>
-              <CalendarBlank size={16} weight="fill" /> Há um dia
+              <CalendarBlank size={16} weight="fill" />{' '}
+              {issueOpened.created_at &&
+                formatDistanceToNow(new Date(issueOpened.created_at), {
+                  addSuffix: true,
+                  locale: ptBR,
+                })}
             </span>
             <span>
-              <Chats size={16} weight="fill" /> 5 comentários
+              <Chats size={16} weight="fill" /> {issueOpened.comments}{' '}
+              {issueOpened.comments === 1 ? 'Comentário' : 'Comentários'}
             </span>
           </PostInfo>
         </PostContent>
 
         <PostBody>
-          <p>
-            Programming languages all have built-in data structures, but these
-            often differ from one language to another. This article attempts to
-            list the built-in data structures available in JavaScript and what
-            properties they have. These can be used to build other data
-            structures. Wherever possible, comparisons with other languages are
-            drawn. Dynamic typing JavaScript is a loosely typed and dynamic
-            language. Variables in JavaScript are not directly associated with
-            any particular value type, and any variable can be assigned (and
-            re-assigned) values of all types:
-          </p>
+          <p>{issueOpened.body}</p>
         </PostBody>
       </PostContainer>
     </>

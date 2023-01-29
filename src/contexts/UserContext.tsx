@@ -60,7 +60,7 @@ export function UserProvider({ children }: UserProviderProps) {
   const fetchIssues = useCallback(async (query?: string) => {
     const response = await api.get(
       `search/issues?${
-        query ? `q=${query}&20` : 'q=%20'
+        query ? `q=${query}%20` : 'q=%20'
       }repo:leotheodoro/github-blog`,
     )
 

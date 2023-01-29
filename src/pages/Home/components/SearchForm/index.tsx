@@ -1,14 +1,35 @@
 import { SearchFormContainer } from './styles'
+import * as z from 'zod'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useContext } from 'react'
+import { UserContext } from '../../../../contexts/UserContext'
+
+const searchFormSchema = z.object({
+  query: z.string(),
+})
+
+type SearchFormInputs = z.infer<typeof searchFormSchema>
 
 export function SearchForm() {
+  const { fetchIssues } = useContext(UserContext)
+
+  const { register, handleSubmit } = useForm<SearchFormInputs>({
+    resolver: zodResolver(searchFormSchema),
+  })
+
+  async function handleSearchIssues({ query }: SearchFormInputs) {
+    await fetchIssues(query)
+  }
+
   return (
-    <SearchFormContainer>
+    <SearchFormContainer onSubmit={handleSubmit(handleSearchIssues)}>
       <div>
         <strong>Publicações</strong>
         <span>6 publicações</span>
       </div>
 
-      <input type="text" placeholder="Buscar conteúdo" />
+      <input type="text" placeholder="Buscar conteúdo" {...register('query')} />
     </SearchFormContainer>
   )
 }
